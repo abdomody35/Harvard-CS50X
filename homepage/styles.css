@@ -1,0 +1,28 @@
+body {
+    background-color: #282828;
+    text-align: center;
+    color: lime;
+}
+
+.linkintxt {
+    text-decoration: none;
+}
+
+p {
+    font-size: 15px;
+}
+
+#heading {
+    padding: 20px;
+}
+
+img {
+    border-radius: 8px;
+    padding: 10px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
