@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Make a quiz
+{% endblock %}
+
+{% block main %}
+
+    <script>
+        let i = 0;
+
+        function addQuestion() {
+            i++;
+            let type = document.getElementById("type").value;
+            let container = document.createElement("div");
+            container.classList.add("question-container");
+
+            switch (type) {
+                case "MCQ":
+                    container.innerHTML = '<div class="mb-3">' +
+                    '<label for="question_' + i + '">Question :</label>' +
+                    '<input id="question_' + i + '" class="form-control mx-auto w-auto" name="mcq"></input>' +
+                    '<label for="ansnum_' + i + '">Number of Answers:</label>' +
+                    '<input class="form-control mx-auto w-auto" type="number" placeholder="Number of Answers" id="ansnum_' + i + '"></input>' +
+                    '<button class="btn btn-secondary" type="button" onclick="addAnswerFields(' + i + ')">Add Answers</button>' +
+                    '<button class="btn btn-danger" type="button" onclick="deleteQuestion(this)">Delete Question</button>' +
+                    '<div id="answers_' + i + '"></div>' +
+                    '</div>';
+                    break;
+                case "Text":
+                    container.innerHTML = '<div class="mb-3">' +
+                    '<label for="question_' + i + '">Question :</label>' +
+                    '<input id="question_' + i + '" class="form-control mx-auto w-auto" name="text"></input>' +
+                    '<label for="answer_' + i + '">Answer :</label>' +
+                    '<input id="question_' + i + '" class="form-control mx-auto w-auto" name="text-answer"></input>' +
+                    '<button class="btn btn-danger" type="button" onclick="deleteQuestion(this)">Delete Question</button>' +
+                    '</div>';
+                    break;
+                case "True or False":
+                    container.innerHTML = '<div class="mb-3">' +
+                    '<label for="question_' + i + '">Question :</label>' +
+                    '<input id="question_' + i + '" class="form-control mx-auto w-auto" name="tf"></input>' +
+                    '<label for="answer_' + i + '">Answer :</label>' +
+                    '<select class="form-control mx-auto w-auto" id="answer_' + i + '" name="tf-answer">' +
+                    '<option disabled selected>Answer</option>' +
+                    '<option value="True">True</option>' +
+                    '<option value="False">False</option>' +
+                    '</select>' +
+                    '<button class="btn btn-danger" type="button" onclick="deleteQuestion(this)">Delete Question</button>' +
+                    '</div>';
+                    break;
+                default:
+                    alert("Choose the type of the question you want to add");
+                    return;
+            }
+            document.getElementById("questions").appendChild(container);
+        }
+
+        function addAnswerFields(questionNumber) {
+            let numAnswers = document.getElementById("ansnum_" + questionNumber).value;
+            let answerContainer = document.getElementById("answers_" + questionNumber);
+            answerContainer.innerHTML = "";
+
+            let hiddenInput = document.createElement("input");
+            hiddenInput.type = "hidden";
+            hiddenInput.name = "mcq-answer-count";
+            hiddenInput.value = numAnswers;
+            answerContainer.appendChild(hiddenInput);
+
+            for (let n = 1; n <= numAnswers; n++) {
+                let input = document.createElement("div");
+                input.classList.add("mb-3", "d-flex", "align-items-center");
+                input.innerHTML = '<label class="flex-grow-1" for="answer_' + questionNumber + '_' + n + '">Answer ' + n + ':</label>' +
+                '<input class="form-control flex-grow-1 mr-2" type="text" id="answer_' + questionNumber + '_' + n + '" name="mcq-answer">' +
+                '<div class="form-check">' +
+                '<input class="form-check-input" type="checkbox" id="correct_' + questionNumber + '_' + n + '" name="mcq-correct" value="' + n + '">' +
+                '<label class="form-check-label" for="correct_' + questionNumber + '_' + n + '">Correct Answer</label>' +
+                '</div>';
+                answerContainer.appendChild(input);
+            }
+        }
+
+
+        function deleteQuestion(button) {
+            let questionContainer = button.parentNode;
+            questionContainer.parentNode.removeChild(questionContainer);
+        }
+    </script>
+
+    <form action="/make" method="post">
+        <div class="mb-3">
+            <p>Question Type :</p>
+            <select class="form-control mx-auto w-auto" id="type">
+                <option disabled selected>Type</option>
+                <option>MCQ</option>
+                <option>Text</option>
+                <option>True or False</option>
+            </select>
+            <br>
+            <button class="btn btn-primary" onclick="addQuestion()" type="button">Add Question</button>
+        </div>
+        <div class="mb-3" id="questions"></div>
+        <button class="btn btn-primary" type="submit">Create Quiz</button>
+    </form>
+
+{% endblock %}
