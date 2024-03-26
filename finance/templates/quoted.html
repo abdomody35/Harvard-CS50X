@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <td>Stock :</td>
+                <td>Price :</td>
+            </tr>
+            <tr>
+                <td>{{ stockQuote["symbol"] }}</td>
+                <td>{{ stockQuote["price"] | usd }}</td>
+            </tr>
+        </table>
+{% endblock %}

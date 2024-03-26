@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped table-bordered table-hover">
+        <tr>
+            <td>Cash :</td>
+            <td>Grand Total :</td>
+        </tr>
+        <tr>
+            <td>{{ cash | usd }}</td>
+            <td>{{ grandTotal | usd }}</td>
+        </tr>
+    </table>
+    {% if not count %}
+        No Stocks Owned.
+    {% else %}
+
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <td>Stock :</td>
+                <td>Shares :</td>
+                <td>Price :</td>
+                <td>Total Value :</td>
+            </tr>
+
+            {% for i in range(0, count) %}
+                <tr>
+                    <td>{{ symbols[i]["stock"] }}</td>
+                    <td>{{ shares[i] }}</td>
+                    <td>{{ prices[i] | usd }}</td>
+                    <td>{{ (shares[i] * prices[i]) | usd }}</td>
+                </tr>
+            {% endfor %}
+
+    {% endif %}
+    </table>
+{% endblock %}

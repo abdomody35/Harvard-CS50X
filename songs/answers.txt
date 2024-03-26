@@ -1,0 +1,12 @@
+SELECT AVG(energy), AVG(valence), AVG(danceability) FROM songs;
+
+Well, There are many ways this could be wrong. Maybe someone else was using his account like his
+girlfriend or one of his family members or he could have used it alot to listen to songs while
+in the car with his friends so it is not always his choice of music which could lead to a non-exact
+reading of his aura. Let's suposse that - for the sake of this question - that it was his choice of
+music, it wasn't influenced by anyone and no one else was using his account. Songs are not only energy,
+valence and danceability - despite being  the most important when it comes to calaulating tha audio
+aura-, They have many more characteristics that cannot be simply ommited because they are less important.
+What they should do is analayize the data in a better way, maybe like try and find a formula that using
+all the characteristics of the top 100 songs - each multiplied by a factor based on the importance -
+would give a better so called "reading" of that audio aura of that person.
