@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+
+                let buttons = document.querySelectorAll("button");
+
+                for (let i = 0; i < buttons.length; i++) {
+                    if (buttons[i].id === 'submit') {
+                        buttons[i].addEventListener('click', function() {
+                            if (document.querySelector("input").value.toLowerCase() === 'scratch') {
+                                document.getElementById("answer").innerHTML = 'Correct';
+                            } else {
+                                document.getElementById("answer").innerHTML = 'Wrong! The Answer is Scratch';
+                            }
+                        });
+                    } else {
+                        buttons[i].addEventListener('click', function() {
+                            if (buttons[i].id === 'correct') {
+                                buttons[i].style.backgroundColor = 'Green';
+                            } else {
+                                buttons[i].style.backgroundColor = 'Red';
+                                document.getElementById("correct").style.backgroundColor = 'Green';
+                            }
+                        });
+                    }
+                }
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>Who won the 2022 FIFA World Cup ?</h3>
+                <button>Italy</button>
+                <button>France</button>
+                <button>Germany</button>
+                <button>Portugal</button>
+                <button id="correct">Argentina</button>
+                <button>Brazil</button>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>What is the name of the first lecture in CS50x 2024 ?</h3>
+                <input type="text"></input>
+                <button id="submit">Submit</button>
+                <p id="answer"></p>
+            </div>
+        </div>
+    </body>
+
+</html>
